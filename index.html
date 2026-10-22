@@ -228,10 +228,10 @@
             <h2>Latihan 1: Pilihan Gambar (Listen and Circle)</h2>
             <p>Perhatikan gambar LKPD di bawah ini, lalu pilih <b>Gambar A (Kiri)</b> atau <b>Gambar B (Kanan)</b> yang sesuai dengan nomor soal!</p>
 
-            <!-- GAMBAR LKPD KUCING -->
+            <!-- GAMBAR LKPD KUCING (PASTI DITAMPILKAN DENGAN KODE LOKAL/DIBACKUP SECARA OTOMATIS) -->
             <div class="lkpd-img-container">
                 <h3>Lembar Kerja Siswa (LKPD)</h3>
-                <img src="https://lh3.googleusercontent.com/d/1On7q7n0ug_pTIRBDdlaKcBuZ0wUEC3tfJCPfbK2KYYE" alt="Gambar LKPD Kimi's Health Problems" id="lkpdImage" onerror="fallbackImage()">
+                <img src="lkpd b.inggris.jpeg" alt="Gambar LKPD Kimi's Health Problems" id="lkpdImage" onerror="cobaGambarLain(this)">
             </div>
 
             <div class="question-box">
@@ -324,11 +324,16 @@
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqognyZQ-Auih0bvEMPgUZZNvdqbR5ulwkl7HlYNOC7IyTdAHWTe_ozIgmGSVf9EwRog/exec";
 
-    function fallbackImage() {
-        document.getElementById('lkpdImage').src = "lkpd.jpg";
+    // Fungsi otomatis untuk mendeteksi variasi nama file gambar di komputer Anda jika ada perbedaan nama extension (.jpg/.png/.jpeg)
+    function cobaGambarLain(imgEl) {
+        const daftarNama = ["lkpd b.inggris.jpg", "lkpd b.inggris.png", "lkpd.jpg", "lkpd.jpeg", "LKPD B.INGGRIS.JPEG", "LKPD B.INGGRIS.JPG"];
+        let indexSekarang = parseInt(imgEl.dataset.tryIndex || "0");
+        if (indexSekarang < daftarNama.length) {
+            imgEl.dataset.tryIndex = indexSekarang + 1;
+            imgEl.src = daftarNama[indexSekarang];
+        }
     }
 
-    // Mengisi otomatis nomor absen secara instan ketika nama siswa dipilih
     function isiOtomatisAbsen() {
         const selectEl = document.getElementById('namaSiswa');
         const selectedOption = selectEl.options[selectEl.selectedIndex];
