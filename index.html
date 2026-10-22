@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Interaktif Pembelajaran Bahasa Inggris - Kimi's Health</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #cbd5e1;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        h1, h2, h3 {
+            color: var(--primary);
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #fff;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        video {
+            width: 100%;
+            border-radius: 8px;
+            outline: none;
+        }
+        table.dictionary {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table.dictionary th, table.dictionary td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+        table.dictionary th {
+            background-color: #e0e7ff;
+            color: var(--primary);
+        }
+        .question-box {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 6px;
+        }
+        .options {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            justify-content: space-around;
+        }
+        .option-item {
+            text-align: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            flex: 1;
+        }
+        .lkpd-img-container {
+            text-align: center;
+            margin-bottom: 25px;
+            background: #fafafa;
+            padding: 15px;
+            border: 2px dashed var(--primary);
+            border-radius: 10px;
+        }
+        .lkpd-img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+        button.record-btn {
+            background-color: #059669;
+            width: auto;
+            padding: 8px 15px;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        button.record-btn:hover {
+            background-color: #047857;
+        }
+        .feedback {
+            font-style: italic;
+            color: #d97706;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Web Interaktif Pembelajaran Bahasa Inggris</h1>
+    <h3>Unit 3: Look and Circle (Kimi's Health Problems)</h3>
+
+    <!-- 1. IDENTITAS SISWA -->
+    <div class="section" id="identity-section">
+        <h2>Identitas Siswa</h2>
+        <div class="form-group">
+            <label for="namaSiswa">Pilih Nama Siswa:</label>
+            <select id="namaSiswa" onchange="isiOtomatisAbsen()">
+                <option value="">-- Pilih Nama Anda --</option>
+                <option value="Ahmad Bibi Prianto" data-absen="3159255731">Ahmad Bibi Prianto</option>
+                <option value="Ahmad Ragil Setiawan" data-absen="3165165321">Ahmad Ragil Setiawan</option>
+                <option value="Ahmad Aidillah" data-absen="3167865986">Ahmad Aidillah</option>
+                <option value="An Nisa Alimah" data-absen="316748314">An Nisa Alimah</option>
+                <option value="Azzahra Radya Utami" data-absen="3160951909">Azzahra Radya Utami</option>
+                <option value="Fatkhul Mahdi Mubarak" data-absen="3156315316">Fatkhul Mahdi Mubarak</option>
+                <option value="Gibran Albiyananda Putra" data-absen="3157295581">Gibran Albiyananda Putra</option>
+                <option value="Muhammad Dandiansyah" data-absen="3169059179">Muhammad Dandiansyah</option>
+                <option value="Muhammad Irawan" data-absen="3167661010">Muhammad Irawan</option>
+                <option value="Muhammad Rava Azka Putra" data-absen="3164563065">Muhammad Rava Azka Putra</option>
+                <option value="Munawarah Annisa Rahma" data-absen="3142981567">Munawarah Annisa Rahma</option>
+                <option value="Nafisa Nur Adila Sari" data-absen="3150199714">Nafisa Nur Adila Sari</option>
+                <option value="Naila Lailatul Zahwa" data-absen="3158560988">Naila Lailatul Zahwa</option>
+                <option value="Rangga Syura" data-absen="3164859442">Rangga Syura</option>
+                <option value="Silva Ananta Nur Afifah" data-absen="3159163528">Silva Ananta Nur Afifah</option>
+                <option value="Widya Erlin Sa'diyah" data-absen="3151799963">Widya Erlin Sa'diyah</option>
+                <option value="Yusep Maumali" data-absen="Yusep">Yusep Maumali</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="absenNisn">Nomor Absen:</label>
+            <input type="text" id="absenNisn" placeholder="Otomatis terisi saat memilih nama" readonly>
+        </div>
+        <div class="form-group">
+            <label for="mapel">Mata Pelajaran:</label>
+            <input type="text" id="mapel" value="B. Inggris" readonly>
+        </div>
+        <div class="form-group">
+            <label for="namaTugas">Nama Tugas:</label>
+            <input type="text" id="namaTugas" value="I've got a stomachache" readonly>
+        </div>
+        <button onclick="mulaiBelajar()">Mulai Mengerjakan</button>
+    </div>
+
+    <!-- KONTEN UTAMA (Disembunyikan sebelum identitas diisi) -->
+    <div id="main-content" style="display: none;">
+
+        <!-- 2. VIDEO PENJELASAN -->
+        <div class="section">
+            <h2>Video Penjelasan Materi</h2>
+            <video controls>
+                <source src="video_materi.mp4" type="video/mp4">
+                Browser Anda tidak mendukung pemutaran video.
+            </video>
+        </div>
+
+        <!-- 3. KAMUS MINI -->
+        <div class="section">
+            <h2>Kamus Mini (Mini Dictionary)</h2>
+            <table class="dictionary">
+                <tr>
+                    <th>Kosakata (English)</th>
+                    <th>Arti (Bahasa Indonesia)</th>
+                </tr>
+                <tr><td>Cold</td><td>Pilek / Masuk angin</td></tr>
+                <tr><td>Headache</td><td>Sakit kepala</td></tr>
+                <tr><td>Cough</td><td>Batuk</td></tr>
+                <tr><td>Fever / Sore Throat</td><td>Demam / Sakit tenggorokan</td></tr>
+                <tr><td>Stomachache</td><td>Sakit perut</td></tr>
+                <tr><td>Sore eyes</td><td>Sakit mata</td></tr>
+            </table>
+        </div>
+
+        <!-- 4. LATIHAN 1: PILIHAN GAMBAR LKPD -->
+        <div class="section">
+            <h2>Latihan 1: Pilihan Gambar (Listen and Circle)</h2>
+            <p>Perhatikan gambar LKPD di bawah ini, lalu pilih <b>Gambar A (Kiri)</b> atau <b>Gambar B (Kanan)</b> yang sesuai dengan nomor soal!</p>
+
+            <!-- GAMBAR LKPD KUCING -->
+            <div class="lkpd-img-container">
+                <h3>Lembar Kerja Siswa (LKPD)</h3>
+                <img src="https://lh3.googleusercontent.com/d/1On7q7n0ug_pTIRBDdlaKcBuZ0wUEC3tfJCPfbK2KYYE" alt="Gambar LKPD Kimi's Health Problems" id="lkpdImage" onerror="fallbackImage()">
+            </div>
+
+            <div class="question-box">
+                <p><b>1. Kimi has a cold.</b></p>
+                <div class="options">
+                    <div class="option-item"><label><input type="radio" name="q1" value="A"> <b>Gambar A (Kiri)</b></label></div>
+                    <div class="option-item"><label><input type="radio" name="q1" value="B"> <b>Gambar B (Kanan)</b></label></div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p><b>2. Kimi has a headache.</b></p>
+                <div class="options">
+                    <div class="option-item"><label><input type="radio" name="q2" value="A"> <b>Gambar A (Kiri)</b></label></div>
+                    <div class="option-item"><label><input type="radio" name="q2" value="B"> <b>Gambar B (Kanan)</b></label></div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p><b>3. Kimi has a cough.</b></p>
+                <div class="options">
+                    <div class="option-item"><label><input type="radio" name="q3" value="A"> <b>Gambar A (Kiri)</b></label></div>
+                    <div class="option-item"><label><input type="radio" name="q3" value="B"> <b>Gambar B (Kanan)</b></label></div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p><b>4. Kimi has a stomachache.</b></p>
+                <div class="options">
+                    <div class="option-item"><label><input type="radio" name="q4" value="A"> <b>Gambar A (Kiri)</b></label></div>
+                    <div class="option-item"><label><input type="radio" name="q4" value="B"> <b>Gambar B (Kanan)</b></label></div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p><b>5. Kimi has sore eyes.</b></p>
+                <div class="options">
+                    <div class="option-item"><label><input type="radio" name="q5" value="A"> <b>Gambar A (Kiri)</b></label></div>
+                    <div class="option-item"><label><input type="radio" name="q5" value="B"> <b>Gambar B (Kanan)</b></label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. LATIHAN 2: MEMBACA & REKAM SUARA -->
+        <div class="section">
+            <h2>Latihan 2: Latihan Membaca (Pronunciation Practice)</h2>
+            <p>Klik tombol rekam, lalu baca kalimat di bawah ini dengan jelas menggunakan mikrofon HP Anda!</p>
+
+            <div class="question-box">
+                <p><b>Kalimat 1:</b> "Kimi has a cold today."</p>
+                <button class="record-btn" onclick="rekamSuara(1, 'Kimi has a cold today')">🎙️ Rekam Suara</button>
+                <p id="result-1" class="feedback">Belum direkam.</p>
+            </div>
+
+            <div class="question-box">
+                <p><b>Kalimat 2:</b> "Kimi has a headache."</p>
+                <button class="record-btn" onclick="rekamSuara(2, 'Kimi has a headache')">🎙️ Rekam Suara</button>
+                <p id="result-2" class="feedback">Belum direkam.</p>
+            </div>
+
+            <div class="question-box">
+                <p><b>Kalimat 3:</b> "Kimi has a cough."</p>
+                <button class="record-btn" onclick="rekamSuara(3, 'Kimi has a cough')">🎙️ Rekam Suara</button>
+                <p id="result-3" class="feedback">Belum direkam.</p>
+            </div>
+
+            <div class="question-box">
+                <p><b>Kalimat 4:</b> "Kimi has a stomachache."</p>
+                <button class="record-btn" onclick="rekamSuara(4, 'Kimi has a stomachache')">🎙️ Rekam Suara</button>
+                <p id="result-4" class="feedback">Belum direkam.</p>
+            </div>
+
+            <div class="question-box">
+                <p><b>Kalimat 5:</b> "Kimi has sore eyes."</p>
+                <button class="record-btn" onclick="rekamSuara(5, 'Kimi has sore eyes')">🎙️ Rekam Suara</button>
+                <p id="result-5" class="feedback">Belum direkam.</p>
+            </div>
+        </div>
+
+        <!-- 6. KIRIM KE AKUN GURU -->
+        <div class="section" style="text-align: center;">
+            <h2>Selesai?</h2>
+            <button onclick="kirimKeGuru()" style="background-color: #059669; font-size: 18px; padding: 15px 30px;">Kirim Nilai ke Akun Guru 🚀</button>
+            <p id="loading">Sedang mengirim nilai ke Google Sheets guru...</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqognyZQ-Auih0bvEMPgUZZNvdqbR5ulwkl7HlYNOC7IyTdAHWTe_ozIgmGSVf9EwRog/exec";
+
+    function fallbackImage() {
+        document.getElementById('lkpdImage').src = "lkpd.jpg";
+    }
+
+    // Mengisi otomatis nomor absen secara instan ketika nama siswa dipilih
+    function isiOtomatisAbsen() {
+        const selectEl = document.getElementById('namaSiswa');
+        const selectedOption = selectEl.options[selectEl.selectedIndex];
+        const absenInput = document.getElementById('absenNisn');
+        
+        if (selectedOption && selectedOption.dataset.absen) {
+            absenInput.value = selectedOption.dataset.absen;
+        } else {
+            absenInput.value = "";
+        }
+    }
+
+    const kunciJawabanLatihan1 = { q1: 'A', q2: 'B', q3: 'B', q4: 'B', q5: 'B' };
+    let skorMembacaList = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+    function mulaiBelajar() {
+        const nama = document.getElementById('namaSiswa').value;
+        const absen = document.getElementById('absenNisn').value;
+        if (!nama || !absen) {
+            alert('Silakan pilih Nama Siswa terlebih dahulu!');
+            return;
+        }
+        document.getElementById('identity-section').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function rekamSuara(nomorSoal, targetTeks) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Maaf, browser Anda tidak mendukung fitur perekam suara otomatis. Gunakan Google Chrome.");
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        const feedbackEl = document.getElementById(`result-${nomorSoal}`);
+        feedbackEl.innerText = "Mendengarkan... Silakan baca kalimatnya!";
+
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            const hasilUcap = event.results[0][0].transcript.toLowerCase();
+            const targetLower = targetTeks.toLowerCase();
+            
+            if (hasilUcap.includes(targetLower.substring(5, 15))) {
+                feedbackEl.innerHTML = `✅ Bagus! Anda membaca: "${event.results[0][0].transcript}" (Benar)`;
+                skorMembacaList[nomorSoal] = 10;
+            } else {
+                feedbackEl.innerHTML = `⚠️ Terdengar: "${event.results[0][0].transcript}". Coba ulangi lagi!`;
+                skorMembacaList[nomorSoal] = 5;
+            }
+        };
+
+        recognition.onerror = function() {
+            feedbackEl.innerText = "Gagal mendeteksi suara. Coba ulangi tombol rekam.";
+        };
+    }
+
+    function kirimKeGuru() {
+        let skorLatihan1 = 0;
+        for (let i = 1; i <= 5; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected && selected.value === kunciJawabanLatihan1[`q${i}`]) {
+                skorLatihan1 += 10;
+            }
+        }
+
+        let skorLatihan2 = 0;
+        for (let i = 1; i <= 5; i++) {
+            skorLatihan2 += skorMembacaList[i];
+        }
+
+        const totalScore = skorLatihan1 + skorLatihan2;
+
+        const dataSiswa = {
+            namaSiswa: document.getElementById('namaSiswa').value,
+            absenNisn: document.getElementById('absenNisn').value,
+            mapel: document.getElementById('mapel').value,
+            namaTugas: document.getElementById('namaTugas').value,
+            score: totalScore
+        };
+
+        document.getElementById('loading').style.display = 'block';
+
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataSiswa)
+        })
+        .then(() => {
+            document.getElementById('loading').style.display = 'none';
+            alert(`🎉 Berhasil! Nilai total Anda (${totalScore}/100) untuk tugas "${dataSiswa.namaTugas}" telah dikirim ke Google Sheets guru.`);
+        })
+        .catch(error => {
+            document.getElementById('loading').style.display = 'none';
+            console.error("Error:", error);
+            alert("Gagal mengirim nilai. Periksa koneksi internet.");
+        });
+    }
+</script>
+
+</body>
+</html>
